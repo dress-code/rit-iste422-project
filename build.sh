@@ -9,9 +9,14 @@ echo "Compiling source code and unit tests..."
 javac -cp lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar *.java
 if [ $? -ne 0 ] ; then echo BUILD FAILED!; exit 1; fi
 
+echo "Writing class files to build..."
+javac -d ./build
+
 echo "Running unit tests..."
-java -cp .:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore EdgeConnectorTest
+java -cp .:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore ./src/test/java/EdgeConnectorTest
 if [ $? -ne 0 ] ; then echo TESTS FAILED!; exit 1; fi
 
 echo "Running application..."
-java RunEdgeConvert
+java ./src/main/javaRunEdgeConvert
+
+
